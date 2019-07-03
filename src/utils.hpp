@@ -1,0 +1,4 @@
+#ifndef RAZOR_UTILS_HPP
+#define RAZOR_UTILS_HPP
+
+#endif //RAZOR_UTILS_HPP
