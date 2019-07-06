@@ -22,17 +22,7 @@ private:
 
     event_manager_t event_manager;
 public:
-    void idle() {
-        bool is_active {true};
-        while(is_active) {
-            //TODO: how should we make sure that we are the last listener?
-            std::function terminate_listener = [&](){ is_active = false; };
-            //TODO: only system can subscribe to event
-            event_manager.subscribe(engine_terminate_t::TYPE_ID, &terminate_listener);
-            render_system.show_frame();
-            input_system.collect_input();
-        }
-    }
+    void idle();
 };
 
 #endif //RAZOR_ENGINE_GAME_ENGINE_T_HPP
