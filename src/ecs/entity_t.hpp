@@ -16,11 +16,19 @@ public:
 //Container for components
 template<typename Inheritor>
 class entity_t : entity_i {
-private:
-    static const int64_t TYPE_ID;
 public:
     int64_t get_id() const override;
     int64_t get_type_id() const override;
 };
+
+template<typename Inheritor>
+int64_t entity_t<Inheritor>::get_id() const {
+    return reinterpret_cast<int64_t>(this);
+}
+
+template<typename Inheritor>
+int64_t entity_t<Inheritor>::get_type_id() const {
+    return Inheritor::TYPE_ID;
+}
 
 #endif //RAZOR_ENGINE_ENTITY_T_HPP
