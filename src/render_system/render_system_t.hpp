@@ -17,7 +17,8 @@ class render_system_t : system_t {
 private:
 //    display_area_t display_area; TODO
 public:
-    void show_frame() {
+    //TODO: show_frame
+    void process() noexcept override {
 
     }
 };

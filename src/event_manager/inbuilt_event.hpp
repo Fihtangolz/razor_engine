@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "event_t.hpp"
+#include "../ability_system_t/action_t.hpp"
 
 /* TODO
  * struct event_type {
@@ -31,7 +31,9 @@ enum class event_type: int64_t {
     ENGINE_SUSPEND,
 };
 
-class engine_terminate_t : public event_t<engine_terminate_t> {
+#define REGISTER_EVENT()
+
+class engine_terminate_t : public action_t<engine_terminate_t> {
 public:
     static const event_type TYPE_ID = {event_type::ENGINE_TERMINATE};
     void execute() override {}

@@ -4,14 +4,14 @@
 #include <vector>
 #include <functional>
 
-#include "event_t.hpp"
+#include "../ability_system_t/action_t.hpp"
 #include "inbuilt_event.hpp" //TODO
 
 using event_listener_t = std::function<void()>*;
 
 class event_manager_t {
 private:
-    std::vector<event_i*> event_queue;
+    std::vector<action_i*> event_queue;
     event_listener_t _listener; //TODO
 public:
     void process_event() {
