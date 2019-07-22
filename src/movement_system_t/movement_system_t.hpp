@@ -5,7 +5,6 @@
 #include "../ecs/system_t.hpp"
 
 struct rotate_component_t : component_t {
-    int speed;
     int w;
     int x;
     int y;
@@ -13,11 +12,11 @@ struct rotate_component_t : component_t {
 };
 
 struct move_component_t : component_t {
-
 };
 
-class movement_system_t : system_t {
+class movement_system_t : public system_t {
 public:
+    void start() noexcept override {}
     //TODO: move
     void process() noexcept override {
 

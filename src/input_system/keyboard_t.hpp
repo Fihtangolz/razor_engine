@@ -3,7 +3,7 @@
 
 #include <X11/Xlib.h>
 
-class keyboard_t : input_device_t final {
+class keyboard_t final : public input_device_t {
 public:
     void tick() final {
         int x=-1,y=-1;

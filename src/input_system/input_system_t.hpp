@@ -12,7 +12,7 @@ public:
     virtual void tick() = 0;
 };
 
-class input_system_t : system_t {
+class input_system_t : public system_t {
 private:
     event_manager_t* event_manager {nullptr};
     std::vector<input_device_t*>  devices;
@@ -27,7 +27,7 @@ public:
             devices.erase(pos);
         }
     }
-
+    void start() noexcept override {}
     //TODO: collect_input
     void process() noexcept override {
         for(auto&& device : devices) {

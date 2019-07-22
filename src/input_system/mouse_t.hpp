@@ -3,7 +3,7 @@
 
 #include <X11/Xlib.h>
 
-class mouse_t : input_device_t final {
+class mouse_t final : public input_device_t {
 public:
     void tick() final {
 
