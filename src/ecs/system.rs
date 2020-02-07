@@ -1,4 +1,4 @@
 pub trait System {
-    fn star(&mut self);
+    fn start(&mut self);
     fn process(&mut self);
 }
