@@ -18,7 +18,7 @@ impl System for InputSys {
     }
 
     fn process(&mut self) {
-        //FIXME: now a simple stub for logging mouse click, also may be are we need event buffering?
+        //FIXME: now a simple stub for logging mouse click, also may be are we need event's buffering?
         let event = self.resiver.recv().unwrap();
         match event {
             Event::DeviceEvent{ event, .. } => match event {
