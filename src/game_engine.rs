@@ -1,23 +1,24 @@
 use crate::ecs;
 use ecs::system::System;
-use crate::render_sys::RenderSys;
+use crate::render_sys::render_sys::RenderSys;
 use crate::input_sys::InputSys;
 
 use winit::{
-    window,
+    window::Window,
     event::Event,
 };
 
 use std::sync::mpsc::Receiver;
 
 pub struct GameEngine {
-    systems: [Box<dyn System>; 2], //TODO: it is compile time know array, box not needed this
+    //TODO: it is compile time know array, box not needed this
+    systems: [Box<dyn System>; 2], 
 }
 
 impl GameEngine {
-    pub fn new(resiver: Receiver<Event<'static, ()>>) -> Self {
+    pub fn new(window: Window, resiver: Receiver<Event<'static, ()>>) -> Self {
         Self { systems: [
-            Box::new(RenderSys{}), 
+            Box::new(RenderSys::new(window)), 
             Box::new(InputSys::new(resiver))
         ] }
     }

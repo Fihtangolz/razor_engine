@@ -16,7 +16,7 @@ fn main() {
     let window = WindowBuilder::new().build(&event_loop).unwrap();
     
     let (sender, resiver) = mpsc::channel();
-    thread::spawn(move || { engine_main(resiver); }); 
+    thread::spawn(move || { engine_main(window, resiver); }); 
     
     event_loop.run(move |event, _, control_flow|  {
         // ControlFlow::Wait pauses the event loop if no events are available to process.
@@ -58,8 +58,8 @@ mod input_sys;
 
 use game_engine::GameEngine;
 
-fn engine_main(resiver: Receiver<Event<'static, ()>>) {
-    GameEngine::new(resiver)
+fn engine_main(window: Window, resiver: Receiver<Event<'static, ()>>) {
+    GameEngine::new(window, resiver)
         .configure()
         .init()
         .idle();

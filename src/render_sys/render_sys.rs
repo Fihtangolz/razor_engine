@@ -6,6 +6,8 @@ use std::{
 };
 
 use ash::vk;
+use winit::window::Window;
+use std::mem::MaybeUninit;
 
 // Represent word space.
 struct WorldSpace {
@@ -46,18 +48,22 @@ struct RenderebleModel {
 }
 
 pub struct RenderSys {
-    // surface: vk::SurfaceKHR,
+    window: Window,
+    surface: vk::SurfaceKHR,
 }
 
 impl RenderSys {
-    fn new() -> Self {
-        RenderSys{}
+    pub fn new(window: Window) -> Self {
+        let mut sys: RenderSys = unsafe { MaybeUninit::uninit().assume_init() };
+        sys.window = window;
+        sys
     }
 }
 
 impl System for RenderSys {
     fn start(&mut self) {
-        unimplemented!();
+        //FIXME: now prepairing surface only for my linux system
+        
     }
     
     fn process(&mut self) {
