@@ -14,25 +14,38 @@ use winit::{
 use std::{
     sync::mpsc::Receiver,
     vec::Vec,
+    iter::Filter,
 };
 
-// struct BaseSystem<Sys: System> {
-//     sys: Sys,
-//     enable: bool,
-// }
+struct BaseSystem {
+    sys: Box<dyn System>,
+    enable: bool,
+}
+
+impl System for BaseSystem {
+    fn start(&mut self) {
+        self.sys.start();
+    }
+
+    fn process(&mut self) {
+        self.sys.process();
+    }
+}
 
 pub struct GameEngine {
-    systems: Vec<Box<dyn System>>, 
+    systems: Vec<BaseSystem>, 
 }
 
 impl GameEngine {
     pub fn new(window: Window, resiver: Receiver<Event<'static, ()>>) -> Self {
-        Self { systems: vec![
-            Box::new(RenderSys::new(window)), 
-            Box::new(InputSys::new(resiver)),
-            Box::new(GuiSys::new()),
-            Box::new(SoundSys::new()),
-        ] }
+        Self { 
+            systems: vec![
+                BaseSystem{ sys: Box::new(RenderSys::new(window)), enable: true},
+                BaseSystem{ sys: Box::new(InputSys::new(resiver)), enable: true},
+                BaseSystem{ sys: Box::new(GuiSys::new()), enable: true},
+                BaseSystem{ sys: Box::new(SoundSys::new()), enable: true},
+            ] 
+        }
     }
     
     pub fn configure(self) -> Self {
@@ -40,14 +53,16 @@ impl GameEngine {
     }
 
     pub fn init(mut self) -> Self {
+        self.systems.iter_mut().
+            map(|s| s.start());
         self
     }
 
     pub fn idle(mut self) {
         loop {
-            for system in &mut self.systems {
-                system.process();
-            }
+            self.systems.iter_mut()
+                .filter(|s| s.enable)
+                .map(|s| s.process());
         }
     }
 }
