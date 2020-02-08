@@ -1,8 +1,10 @@
 use crate::ecs;
 use ecs::system::System;
+
 use crate::render_sys::render_sys::RenderSys;
 use crate::input_sys::InputSys;
 use crate::gui_sys::GuiSys;
+use crate::sound_sys::SoundSys;
 
 use winit::{
     window::Window,
@@ -17,7 +19,7 @@ use std::sync::mpsc::Receiver;
 // }
 
 pub struct GameEngine {
-    systems: [Box<dyn System>; 3], 
+    systems: [Box<dyn System>; 4], 
 }
 
 impl GameEngine {
@@ -26,6 +28,7 @@ impl GameEngine {
             Box::new(RenderSys::new(window)), 
             Box::new(InputSys::new(resiver)),
             Box::new(GuiSys::new()),
+            Box::new(SoundSys::new()),
         ] }
     }
     

@@ -56,6 +56,7 @@ mod game_engine;
 mod render_sys;
 mod input_sys;
 mod gui_sys;
+mod sound_sys;
 
 use game_engine::GameEngine;
 

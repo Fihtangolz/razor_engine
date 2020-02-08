@@ -5,8 +5,8 @@ pub struct GuiSys {
 }
 
 impl GuiSys {
-    pub fn new() {
-
+    pub fn new() -> Self {
+        Self{}
     }
 }
 
@@ -16,6 +16,6 @@ impl System for GuiSys {
     }
 
     fn process(&mut self) {
-        
+   
     }
 }
