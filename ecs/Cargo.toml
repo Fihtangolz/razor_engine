@@ -1,0 +1,9 @@
+[package]
+name = "ecs"
+version = "0.1.0"
+authors = ["Dmitry <mamhigtt@gmail.com>"]
+edition = "2018"
+
+[[bin]]
+name = "ecs"
+path = "src/lib.rs"

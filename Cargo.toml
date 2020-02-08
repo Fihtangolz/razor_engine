@@ -7,5 +7,7 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+component_macro = { path = "component_macro" }
 winit = "0.21.0"
 ash = "0.29.0"
+
