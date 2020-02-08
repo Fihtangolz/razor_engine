@@ -11,7 +11,10 @@ use winit::{
     event::Event,
 };
 
-use std::sync::mpsc::Receiver;
+use std::{
+    sync::mpsc::Receiver,
+    vec::Vec,
+};
 
 // struct BaseSystem<Sys: System> {
 //     sys: Sys,
@@ -19,12 +22,12 @@ use std::sync::mpsc::Receiver;
 // }
 
 pub struct GameEngine {
-    systems: [Box<dyn System>; 4], 
+    systems: Vec<Box<dyn System>>, 
 }
 
 impl GameEngine {
     pub fn new(window: Window, resiver: Receiver<Event<'static, ()>>) -> Self {
-        Self { systems: [
+        Self { systems: vec![
             Box::new(RenderSys::new(window)), 
             Box::new(InputSys::new(resiver)),
             Box::new(GuiSys::new()),
