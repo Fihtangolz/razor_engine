@@ -55,6 +55,7 @@ mod ecs;
 mod game_engine;
 mod render_sys;
 mod input_sys;
+mod gui_sys;
 
 use game_engine::GameEngine;
 

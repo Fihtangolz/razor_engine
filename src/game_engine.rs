@@ -2,6 +2,7 @@ use crate::ecs;
 use ecs::system::System;
 use crate::render_sys::render_sys::RenderSys;
 use crate::input_sys::InputSys;
+use crate::gui_sys::GuiSys;
 
 use winit::{
     window::Window,
@@ -10,16 +11,21 @@ use winit::{
 
 use std::sync::mpsc::Receiver;
 
+// struct BaseSystem<Sys: System> {
+//     sys: Sys,
+//     enable: bool,
+// }
+
 pub struct GameEngine {
-    //TODO: it is compile time know array, box not needed this
-    systems: [Box<dyn System>; 2], 
+    systems: [Box<dyn System>; 3], 
 }
 
 impl GameEngine {
     pub fn new(window: Window, resiver: Receiver<Event<'static, ()>>) -> Self {
         Self { systems: [
             Box::new(RenderSys::new(window)), 
-            Box::new(InputSys::new(resiver))
+            Box::new(InputSys::new(resiver)),
+            Box::new(GuiSys::new()),
         ] }
     }
     
